@@ -17,7 +17,8 @@
   },
   "homepage": "https://github.com/JeffLabonte/mqt_manager_client#readme",
   "dependencies": {
-    "mongoose": "^5.1.2"
+    "mongoose": "^5.1.2",
+    "paho-mqtt": "^1.0.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
