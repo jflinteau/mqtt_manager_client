@@ -4,7 +4,8 @@
   "description": "Client that communicate with MQTT broker using the configuration in saved by mqtt_microservice_conf_manager ",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "nodemon ./index.js"
   },
   "repository": {
     "type": "git",
