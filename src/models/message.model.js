@@ -3,6 +3,8 @@ import { model } from "mongoose";
 var Schema = mongoose.Schema;
 
 var messageSchema = new Schema({
+    card : { type: Schema.Types.ObjectId, ref: 'Card', required: true},
+    parameter : { Type: Schema.Types.ObjectId, ref: "Parameter", required: true},
     content: {type: String, required: true},
 });
 
