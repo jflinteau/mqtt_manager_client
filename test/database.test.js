@@ -13,3 +13,9 @@ test("Add a message to MongoDB", () => {
         expect(result).toBeDefined();
     });
 });
+
+test("Remove test messages from MongoDB", () => {
+    Message.deleteMany({content: /This is a test/}, (err) => {
+        expect(err).toBe(null);
+    })
+});
