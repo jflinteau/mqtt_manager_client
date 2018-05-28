@@ -3,7 +3,7 @@ import { model } from "mongoose";
 var Schema = mongoose.Schema;
 
 var pieceSchema = new Schema({
-    piece : { type : Piece }
+    parameters : [ 'Parameter' ]
 });
 
 var Piece = mongoose.model('Piece', pieceSchema);

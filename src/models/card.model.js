@@ -3,7 +3,7 @@ import { model } from "mongoose";
 var Schema = mongoose.Schema;
 
 var cardSchema = new Schema({
-    piece : { type: Schema.ObjectId, ref: 'Piece'}
+    piece : { type: Schema.ObjectId, ref: 'Piece', required: true}
 });
 
 var Card = mongoose.model('Card', cardSchema);
