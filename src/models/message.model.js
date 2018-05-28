@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 
 var messageSchema = new Schema({
     content: {type: String, required: true},
-    
 });
 
 var Message = mongoose.model('Message', messageSchema);
