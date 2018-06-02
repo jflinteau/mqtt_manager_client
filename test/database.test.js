@@ -1,4 +1,5 @@
 import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
+import { mongoose } from "../src/repository/common.repo";
 import { Card } from '../src/models/card.model';
 import { Piece } from '../src/models/piece.model';
 import { Parameter } from '../src/models/parameter.model';
@@ -58,6 +59,17 @@ describe("Test the Database", () => {
             if(err) return handleError(err);
 
         });
+    });
+
+    test("Disconnect database", () => {
+        var worked = undefined;
+        try {
+           mongoose.connection.close(() => { });
+           worked = true;
+        }catch(err) {
+            expect(err).toBe(null);
+        }
+        expect(worked).toBe(true);
     })
 
 });
