@@ -13,7 +13,7 @@ before_install:
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install python@2; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then brew install mongodb; fi
   - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo mkdir -p /data/db; fi
-  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then mongod; fi
+  - if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then sudo mongod; fi
 
 node_js:
   - "10"
