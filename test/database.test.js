@@ -22,8 +22,6 @@ describe("Test the Database", () => {
             date: new Date()
         });
 
-        console.log(card);
-
         expect(card).not.toBeUndefined();
         expect(card.pieces[0]).toBe(piece);
     });
