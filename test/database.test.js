@@ -94,9 +94,77 @@ describe("Test CRUD with MqttConfiguration", () => {
         });
     });
 
+});
+
+describe("Test CRUD with Log", () => {
+    var card = undefined;
+    var log = undefined;
+
+    test("Create a card for MongoDB", () => {
+        expect(card).toBeUndefined();
+
+        var piece = new PieceBuilder().makeName("RPI 3").makeNewParameter({name: "Temperature", value: "100"}).build();
+
+        card = new Card({
+            cardId: "E3:23:12:44:22",
+            pieces: [
+                piece
+            ],
+            date: new Date()
+        });
+
+        expect(card).not.toBeUndefined();
+        expect(card.pieces[0]).toBe(piece);
+    });
+
+    test("Save a Card to MongoDB", (done) => {
+       expect(card).toBe(card);
+       card.save((err, result) => {
+          expect(err).toBe(null);
+          expect(result).toBeDefined();
+          done();
+       });
+    });
+
+    test("Create a log for MongoDB", () =>{
+        expect(log).toBeUndefined();
+
+        log = new Log({
+            timestamp: new Date(),
+            card: card,
+            cardId: card.cardId
+        });
+
+        expect(log).not.toBeUndefined();
+        expect(log.card).toBe(card);
+    });
+
+    test("Save the log", (done) => {
+       log.save((err,result) => {
+          expect(err).toBe(null);
+          expect(result).toBeDefined();
+       });
+    });
+
+    test("Find the log", (done) => {
+        expect(log).toBe(log);
+
+        Log.find({"cardId": card.cardId}, '', (err, log) => {
+           expect(err).toBe(null);
+           expect(log).toBe(log);
+           done();
+        });
+    });
+});
+
+describe("Clean up Database", () => {
+
+    test('Remove ')
+
     test("Close connection", () => {
         mongoose.connection.close();
     })
+
 });
 
 
