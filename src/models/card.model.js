@@ -3,7 +3,9 @@ var mongooseUniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 var cardSchema = new Schema({
-    piece : { type: Schema.ObjectId, ref: 'Piece', required: true}
+    cardId: {type: String, required: true},
+    pieces : { type: Array, required: true},
+    date: {type: Date, default: new Date()}
 });
 
 cardSchema.plugin(mongooseUniqueValidator);
