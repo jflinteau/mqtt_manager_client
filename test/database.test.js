@@ -94,6 +94,10 @@ describe("Test CRUD with MqttConfiguration", () => {
         });
     });
 
+    test("Close connection", () => {
+        mongoose.connection.close();
+    })
 });
+
 
 
