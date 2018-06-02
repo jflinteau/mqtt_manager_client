@@ -1,18 +1,23 @@
 import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
 import { Card } from '../src/models/card.model';
+import { Piece } from '../src/models/piece.model';
+import { Parameter } from '../src/models/parameter.model';
 
-describe("Test with Database", () => {
-    test("Add a card to MongoDB", () => {
+describe("Test the Database", () => {
+    var card = undefined;
+    test("Create a card for MongoDB", () => {
+        expect(card).toBeUndefined();
         var parameter = new Parameter({
             name: "Temperature",
             value: "60"
         });
 
         var piece = new Piece({
-            parameter: parameter
+            parameter: parameter,
+            name: "RPI"
         });
 
-        var card = new Card({
+        card = new Card({
             piece: piece,
             date: new Date()
         });
@@ -22,17 +27,13 @@ describe("Test with Database", () => {
         expect(card.piece).toBe(piece);
     });
 
-    test("Add a card to MongoDB", () => {
-        var card = new Card();
+    test("Save a user to mongoDB", () => {
         card.save((err, result) => {
             expect(err).toBe(null);
             expect(result).toBeDefined();
+
+            if(err) return handleError(err);
         })
     });
 
-    test("Remove test messages from MongoDB", () => {
-        Message.deleteMany({content: /This is a test/}, (err) => {
-            expect(err).toBe(null);
-        });
-    });
 });
