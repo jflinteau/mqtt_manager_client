@@ -53,4 +53,13 @@ describe("Test the Database", () => {
            done();
        })
     });
+
+    test("Disconnect the database", (done) => {
+       try {
+           mongoose.connection.close();
+           done();
+       }catch(err){
+           expect(err).toBeUndefined();
+       }
+    });
 });
