@@ -2,12 +2,11 @@ import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
 import { mongoose } from "../src/repository/common.repo";
 import { Card } from '../src/models/card.model';
 import { PieceBuilder } from "../src/builders/piece.builder";
-import { Parameter } from '../src/models/parameter.model';
 
-describe("Test the Database", () => {
+describe("Test CRUD with Card Model", () => {
     var card = undefined;
     var piece = undefined;
-    var parameter = undefined;
+
     test("Create a card for MongoDB", () => {
         expect(card).toBeUndefined();
         expect(piece).toBeUndefined();
@@ -53,13 +52,48 @@ describe("Test the Database", () => {
            done();
        })
     });
-
-    test("Disconnect the database", (done) => {
-       try {
-           mongoose.connection.close();
-           done();
-       }catch(err){
-           expect(err).toBeUndefined();
-       }
-    });
 });
+
+describe("Test CRUD with MqttConfiguration", () => {
+    var mqttConfiguration = undefined;
+    var cardId = "4D:3E:FE:E2:10";
+    var parameter = "Temperature";
+
+    test("Create a mqtt confiuration", () => {
+        expect(mqttConfiguration).toBeUndefined();
+
+        mqttConfiguration = new MqttConfiguration({
+            cardId: cardId,
+            parameter: parameter
+        });
+
+    });
+
+    test("Save Mqtt Configuration", (done) => {
+       expect(mqttConfiguration).toBeDefined();
+       mqttConfiguration.save((err,result) => {
+          expect(err).toBe(null);
+          expect(result).toBeDefined();
+          done();
+       });
+    });
+
+    test('Find Mqtt Configurations', (done) => {
+       MqttConfiguration.findOne({'cardId' : cardId}, '', (err, config) => {
+           expect(err).toBe(null);
+           expect(config.cardId).toBe(cardId);
+           expect(config.parameter).toBe(parameter);
+           done();
+       });
+    });
+
+    test('Delete Mqtt Configuration', (done) => {
+        MqttConfiguration.deleteMany({ 'cardId': cardId }, (err) => {
+            expect(err).toBe(null);
+            done();
+        });
+    });
+
+});
+
+

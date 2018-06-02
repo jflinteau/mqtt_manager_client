@@ -5,7 +5,8 @@ var mongooseUniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 var configurationSchema = new Schema({
-    'card': {type: Schema.ObjectId, ref: 'Card'}
+   cardId: { type: String, required: true },
+   parameter: { type: String,  required: true}
 });
 
 var MqttConfiguration = mongoose.model('MqttConfiguration', configurationSchema);
