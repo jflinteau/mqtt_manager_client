@@ -1,10 +1,14 @@
 import { mongoose } from "../repository/common.repo";
-import { model } from "mongoose";
+var mongooseUniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 var pieceSchema = new Schema({
-    piece : { type : Piece }
+   parameter: { type: Schema.ObjectId, ref:"Parameter" },
+   name: { type: String }
 });
 
-var Piece = mongoose.model('Piece', pieceSchema);
-export { Piece };
+mongooseUniqueValidator(pieceSchema);
+
+var Piece =  mongoose.model('Piece', pieceSchema);
+
+export { Piece }
