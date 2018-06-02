@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="db6da57a-8865-4e8d-8f3c-d0eab2d33a6d" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/models/parameter.model.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/models/piece.model.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/database.test.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/database.test.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -21,8 +19,8 @@
       <file leaf-file-name="database.test.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/test/database.test.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+            <state relative-caret-position="435">
+              <caret line="54" selection-start-line="54" selection-end-line="54" />
               <folding>
                 <element signature="e#0#74#0" expanded="true" />
               </folding>
@@ -197,7 +195,7 @@
       <workItem from="1527904417853" duration="215000" />
       <workItem from="1527904657861" duration="407000" />
       <workItem from="1527905086783" duration="1266000" />
-      <workItem from="1527906614833" duration="1404000" />
+      <workItem from="1527906614833" duration="2014000" />
     </task>
     <servers />
   </component>
@@ -207,7 +205,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="3292000" />
+    <option name="totallyTimeSpent" value="3902000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1920" y="27" width="1920" height="1053" extended-state="6" />
@@ -314,13 +312,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/models/parameter.model.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/models/piece.model.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -328,10 +319,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/models/parameter.model.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="30">
+          <caret line="2" column="28" selection-start-line="2" selection-start-column="28" selection-end-line="2" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/database.test.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="34" column="43" selection-start-line="34" selection-start-column="43" selection-end-line="34" selection-end-column="43" />
+        <state relative-caret-position="435">
+          <caret line="54" selection-start-line="54" selection-end-line="54" />
           <folding>
             <element signature="e#0#74#0" expanded="true" />
           </folding>

@@ -5,14 +5,19 @@ import { Parameter } from '../src/models/parameter.model';
 
 describe("Test the Database", () => {
     var card = undefined;
+    var piece = undefined;
+    var parameter = undefined;
     test("Create a card for MongoDB", () => {
         expect(card).toBeUndefined();
-        var parameter = new Parameter({
+        expect(piece).toBeUndefined();
+        expect(parameter).toBeUndefined();
+
+        parameter = new Parameter({
             name: "Temperature",
             value: "60"
         });
 
-        var piece = new Piece({
+        piece = new Piece({
             parameter: parameter,
             name: "RPI"
         });
@@ -27,7 +32,7 @@ describe("Test the Database", () => {
         expect(card.piece).toBe(piece);
     });
 
-    test("Save a user to mongoDB", () => {
+    test("Save a card to mongoDB", () => {
         card.save((err, result) => {
             expect(err).toBe(null);
             expect(result).toBeDefined();
@@ -35,5 +40,24 @@ describe("Test the Database", () => {
             if(err) return handleError(err);
         })
     });
+
+    test("Save piece to mongoDB", () => {
+        piece.save((err, result) => {
+            expect(err).toBe(null);
+            expect(result).toBeDefined();
+
+            if(err) return handleError(err);
+        })
+    });
+
+    test("Save parameter to mongoDB", () => {
+        parameter.save((err, result) => {
+            expect(err).toBe(null);
+            expect(result).toBeDefined();
+
+            if(err) return handleError(err);
+
+        });
+    })
 
 });
