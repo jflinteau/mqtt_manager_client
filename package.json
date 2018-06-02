@@ -4,7 +4,7 @@
   "description": "Client that communicate with MQTT broker using the configuration in saved by mqtt_microservice_conf_manager ",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --verbose",
     "start": "nodemon --exec babel-node --presets=es2015 -- ./index.js ./index.js"
   },
   "repository": {
@@ -20,7 +20,8 @@
   "dependencies": {
     "mongoose": "^5.1.2",
     "mongoose-unique-validator": "^2.0.1",
-    "paho-mqtt": "^1.0.4"
+    "paho-mqtt": "^1.0.4",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

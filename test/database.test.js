@@ -1,6 +1,7 @@
 import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
+import { mongoose } from "../src/repository/common.repo";
 import { Card } from '../src/models/card.model';
-import { Piece } from '../src/models/piece.model';
+import { PieceBuilder } from "../src/builders/piece.builder";
 import { Parameter } from '../src/models/parameter.model';
 
 describe("Test the Database", () => {
@@ -10,54 +11,48 @@ describe("Test the Database", () => {
     test("Create a card for MongoDB", () => {
         expect(card).toBeUndefined();
         expect(piece).toBeUndefined();
-        expect(parameter).toBeUndefined();
 
-        parameter = new Parameter({
-            name: "Temperature",
-            value: "60"
-        });
-
-        piece = new Piece({
-            parameter: parameter,
-            name: "RPI"
-        });
+        piece = new PieceBuilder().makeName("RPI 3").makeNewParameter({name: "Temperature", value: "100"}).build();
 
         card = new Card({
-            piece: piece,
+            cardId: "E3:23:12:44:22",
+            pieces: [
+                piece
+            ],
             date: new Date()
         });
 
+        console.log(card);
+
         expect(card).not.toBeUndefined();
-        expect(piece.parameter).toBe(parameter);
-        expect(card.piece).toBe(piece);
+        expect(card.pieces[0]).toBe(piece);
     });
 
-    test("Save a card to mongoDB", () => {
+    test("Save a card to mongoDB", (done) => {
         card.save((err, result) => {
             expect(err).toBe(null);
             expect(result).toBeDefined();
-
             if(err) return handleError(err);
+            done();
         })
     });
 
-    test("Save piece to mongoDB", () => {
-        piece.save((err, result) => {
-            expect(err).toBe(null);
-            expect(result).toBeDefined();
 
-            if(err) return handleError(err);
-        })
+    test("Find a card", (done) => {
+        Card.findOne({ 'cardId': card.cardId}, "", (err, card) => {
+            expect(err).toBe(null);
+            expect(card).toBeDefined();
+            expect(card).not.toBe(null);
+            expect(card.pieces[0].name).toBe(piece.name);
+            expect(card.pieces[0]._id.toString()).toBe(piece._id.toString());
+            done();
+       })
     });
 
-    test("Save parameter to mongoDB", () => {
-        parameter.save((err, result) => {
-            expect(err).toBe(null);
-            expect(result).toBeDefined();
-
-            if(err) return handleError(err);
-
-        });
-    })
-
+    test("Delete test values", (done) => {
+       Card.deleteMany({"cardId":"E3:23:12:44:22"}, (err) => {
+           expect(err).toBe(null);
+           done();
+       })
+    });
 });
