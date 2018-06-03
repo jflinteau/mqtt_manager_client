@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon ./index.js"
+    "start": "nodemon --exec babel-node --presets=es2015 -- ./index.js ./index.js"
   },
   "repository": {
     "type": "git",
@@ -19,6 +19,7 @@
   "homepage": "https://github.com/JeffLabonte/mqt_manager_client#readme",
   "dependencies": {
     "mongoose": "^5.1.2",
+    "mongoose-unique-validator": "^2.0.1",
     "paho-mqtt": "^1.0.4"
   },
   "devDependencies": {
