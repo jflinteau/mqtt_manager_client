@@ -1,11 +1,11 @@
 import { mongoose } from "../repository/common.repo";
-var mongooseUniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
 var parameterSchema = new Schema({
-   name: {type: String},
-   value: {type: String}
+    name: {type: String, required: true},
+    value: {type: String, required: true}
 });
 
 var Parameter = mongoose.model("Parameter", parameterSchema);
-export { Parameter }
+
+export { Parameter };

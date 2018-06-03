@@ -1,5 +1,11 @@
 {
   "name": "mqtt_manager_client",
+  "jest": {
+    "verbose": true,
+    "collectCoverage": true,
+    "bail": true,
+    "testEnvironment": "node"
+  },
   "version": "1.0.0",
   "description": "Client that communicate with MQTT broker using the configuration in saved by mqtt_microservice_conf_manager ",
   "main": "index.js",
@@ -20,7 +26,8 @@
   "dependencies": {
     "mongoose": "^5.1.2",
     "mongoose-unique-validator": "^2.0.1",
-    "paho-mqtt": "^1.0.4"
+    "paho-mqtt": "^1.0.4",
+    "uuid": "^3.2.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
