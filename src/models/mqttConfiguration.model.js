@@ -9,6 +9,6 @@ var configurationSchema = new Schema({
    parameter: { type: String,  required: true}
 });
 
-var MqttConfiguration = mongoose.model('MqttConfiguration', configurationSchema);
+var MqttConfiguration = mongoose.model('MqttConfigurations', configurationSchema);
 
 export { MqttConfiguration }
