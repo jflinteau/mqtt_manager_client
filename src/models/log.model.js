@@ -8,6 +8,6 @@ var logSchema = new Schema({
     timestamp: { type: Date, default: Date.now(), timestamp: true}
 });
 
-var Log = mongoose.model("Log", logSchema);
+var Log = mongoose.model("Logs", logSchema);
 
 export { Log }

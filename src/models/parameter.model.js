@@ -6,6 +6,6 @@ var parameterSchema = new Schema({
     value: {type: String, required: true}
 });
 
-var Parameter = mongoose.model("Parameter", parameterSchema);
+var Parameter = mongoose.model("Parameters", parameterSchema);
 
 export { Parameter };

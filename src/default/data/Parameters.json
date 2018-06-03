@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "_model": "Parameters",
+    "temperatureParameter": {
+      "name": "temperature",
+      "value": "0"
+    },
+    "humidityParameter": {
+      "name": "humidity",
+      "value": "0"
+    },
+    "pressureParameter": {
+      "name": "pressure",
+      "value": "0"
+    },
+    "isSunnyParameter": {
+      "name": "isSunny",
+      "value": "false"
+    },
+    "isRainyParameter": {
+      "name": "isRainy",
+      "value": "false"
+    },
+    "lightParameter": {
+      "name": "light",
+      "value": ""
+    }
+  }
+}

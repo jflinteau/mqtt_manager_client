@@ -10,5 +10,5 @@ var cardSchema = new Schema({
 
 cardSchema.plugin(mongooseUniqueValidator);
 
-var Card = mongoose.model('Card', cardSchema);
+var Card = mongoose.model('Cards', cardSchema);
 export { Card };
