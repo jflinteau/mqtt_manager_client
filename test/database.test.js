@@ -1,7 +1,12 @@
 import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
 import { mongoose } from "../src/repository/common.repo";
 import { Card } from '../src/models/card.model';
-import { PieceBuilder } from "../src/builders/piece.builder";
+import { Log } from "../src/models/log.model";
+import { PieceBuilder } from "../src/builders/piece.builder"
+
+
+const cardId = "E3:23:12:44:22";
+const parameter = "Temperature";
 
 describe("Test CRUD with Card Model", () => {
     var card = undefined;
@@ -14,7 +19,7 @@ describe("Test CRUD with Card Model", () => {
         piece = new PieceBuilder().makeName("RPI 3").makeNewParameter({name: "Temperature", value: "100"}).build();
 
         card = new Card({
-            cardId: "E3:23:12:44:22",
+            cardId: cardId,
             pieces: [
                 piece
             ],
@@ -56,8 +61,6 @@ describe("Test CRUD with Card Model", () => {
 
 describe("Test CRUD with MqttConfiguration", () => {
     var mqttConfiguration = undefined;
-    var cardId = "4D:3E:FE:E2:10";
-    var parameter = "Temperature";
 
     test("Create a mqtt confiuration", () => {
         expect(mqttConfiguration).toBeUndefined();
@@ -131,25 +134,29 @@ describe("Test CRUD with Log", () => {
 
         log = new Log({
             timestamp: new Date(),
-            card: card,
+            card: [
+                card
+            ],
             cardId: card.cardId
         });
 
         expect(log).not.toBeUndefined();
-        expect(log.card).toBe(card);
+        expect(log.card[0]).toBe(card);
     });
 
     test("Save the log", (done) => {
-       log.save((err,result) => {
-          expect(err).toBe(null);
-          expect(result).toBeDefined();
-       });
+        expect(log).toBeDefined();
+        log.save((err,result) => {
+           expect(err).toBe(null);
+           expect(result).toBeDefined();
+           done()
+        });
     });
 
     test("Find the log", (done) => {
         expect(log).toBe(log);
 
-        Log.find({"cardId": card.cardId}, '', (err, log) => {
+        Log.find({"cardId": cardId}, '', (err, log) => {
            expect(err).toBe(null);
            expect(log).toBe(log);
            done();
@@ -159,7 +166,26 @@ describe("Test CRUD with Log", () => {
 
 describe("Clean up Database", () => {
 
-    test('Remove ')
+    test('Remove all cards (Test)', (done) => {
+        Card.deleteMany({ "cardId": cardId } ,(err) => {
+            expect(err).toBe(null);
+            done();
+        });
+    });
+
+    test("Remove all MQTT configurations (Tests)", (done) => {
+       MqttConfiguration.deleteMany({ "cardId": cardId }, (err) => {
+           expect(err).toBe(null);
+           done();
+       });
+    });
+
+    test("Remove all Logs (Tests", (done) => {
+       Log.deleteMany({ "cardId": cardId}, (err) => {
+           expect(err).toBe(null);
+           done();
+       })
+    });
 
     test("Close connection", () => {
         mongoose.connection.close();
