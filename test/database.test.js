@@ -4,7 +4,7 @@ import { Card } from '../src/models/card.model';
 import { Log } from "../src/models/log.model";
 import { Parameter } from "../src/models/parameter.model";
 import { PieceBuilder } from "../src/builders/piece.builder"
-import seeder from "../scripts/seedParameters";
+import seeder from "../src/default/seeder/seedParameters";
 
 const cardId = "E3:23:12:44:22";
 const parameter = "temperature";

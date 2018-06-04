@@ -1,5 +1,5 @@
-import { Parameter } from "../src/models/parameter.model";
-var data = require('../src/default/data/Parameters.json');
+import { Parameter } from "../../models/parameter.model";
+var data = require('../data/Parameters.json');
 var seeder = require('mongoose-seeder');
 
 class Seeder{
