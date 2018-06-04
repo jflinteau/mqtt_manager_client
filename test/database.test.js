@@ -2,11 +2,43 @@ import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
 import { mongoose } from "../src/repository/common.repo";
 import { Card } from '../src/models/card.model';
 import { Log } from "../src/models/log.model";
+import { Parameter } from "../src/models/parameter.model";
 import { PieceBuilder } from "../src/builders/piece.builder"
-
+import seeder from "../scripts/seedParameters";
 
 const cardId = "E3:23:12:44:22";
-const parameter = "Temperature";
+const parameter = "temperature";
+
+describe("Seed Data to Parameter docuement", () => {
+    test("Create Parameter Docuement", async () => {
+        try {
+            await seeder.seedParameters();
+        }catch(err){
+            expect(err).toBe(null);
+        }
+    });
+
+    test("Find Parameters", (done) => {
+        setTimeout(() => {
+            Parameter.find({}, "", (err, parameters) => {
+                expect(err).toBe(null);
+                expect(parameters.length).not.toBe(0);
+                parameters.forEach((param, index) => {
+                    expect(param.value).toBeDefined();
+                    expect(param.name).toBeDefined();
+                });
+                done();
+            })
+        }, 1000);
+    });
+
+    test('Delete all the parameters', (done) => {
+       Parameter.deleteMany({}, (err) => {
+            expect(err).toBe(null);
+            done();
+       });
+    });
+});
 
 describe("Test CRUD with Card Model", () => {
     var card = undefined;
