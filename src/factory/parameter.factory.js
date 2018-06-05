@@ -2,30 +2,25 @@ import { Parameter } from "../models/parameter.model";
 
 class ParameterFactory{
 
-    static create(type=''){
-        if(type == '') throw new Error("You must have a type");
-        switch (true) {
-            case type == "temperature":
-                // TODO: Create temperature parameter
-                break;
-            case type == "humidity":
-                // TODO: Create humidity parameter
-                break;
-            case type == "pressure":
-                // TODO: Create a pressure parameter
-                break;
-            case type == "isSunny":
-                // TODO: Create an isSunny parameter
-                break;
-            case type == "isRainy":
-                // TODO: Create an isRainy parameter
-                break;
-            case type == "light":
-                // TODO: Create a light parameter
-                break;
+    static async create(type){
+        console.error(type);
+        switch (type) {
+            case "temperature":
+                return await Parameter.findOne({"name": "temperature"});
+            case "humidity":
+                return await Parameter.findOne({"name": "humidity"});
+            case "pressure":
+                return await Parameter.findOne({"name": "pressure"});
+            case "isSunny":
+                return await Parameter.findOne({"name": "isSunny"});
+            case "isRainy":
+                return await Parameter.findOne({"name": "isRainy"});
+            case "light":
+                return await Parameter.findOne({"name": "light"});
             default:
                 throw new Error("This type doesn't exists");
         }
+
     }
 
 }

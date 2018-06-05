@@ -1,6 +1,6 @@
 import { Card } from "./src/models/card.model";
 import { PieceBuilder} from "./src/builders/piece.builder";
-
+import { ParameterFactory } from "./src/factory/parameter.factory";
 
 var card = new Card({
     pieces: [
@@ -8,6 +8,14 @@ var card = new Card({
     ],
     cardId: "E3:23:12:44:22",
 });
+async function param(){
+
+    var parameter = await ParameterFactory.create("temperature");
+
+    console.log(parameter);
+}
+
+param();
 
 card.save();
 
