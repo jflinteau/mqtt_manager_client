@@ -1,7 +1,6 @@
 import { Parameter } from "../models/parameter.model";
 
 class ParameterFactory{
-    constructor(){ }
 
     static create(type=''){
         if(type == '') throw new Error("You must have a type");
@@ -30,3 +29,5 @@ class ParameterFactory{
     }
 
 }
+
+export { ParameterFactory }

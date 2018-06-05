@@ -3,7 +3,8 @@ import { mongoose } from "../src/repository/common.repo";
 import { Card } from '../src/models/card.model';
 import { Log } from "../src/models/log.model";
 import { Parameter } from "../src/models/parameter.model";
-import { PieceBuilder } from "../src/builders/piece.builder"
+import { PieceBuilder } from "../src/builders/piece.builder";
+import { ParameterFactory } from "../src/factory/parameter.factory";
 import seeder from "../src/default/seeder/seedParameters";
 
 const cardId = "E3:23:12:44:22";
@@ -200,6 +201,132 @@ describe("Test CRUD with Log", () => {
     });
 });
 
+describe("Test parameter factory", () => {
+    test("Create Parameter Docuement", () => {
+        try {
+            seeder.seedParameters();
+        }catch(err){
+            expect(err).toBe(null);
+        }
+    });
+
+    test("Generate error by not passing type argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create();
+            hasError = false;
+        }catch(err){
+            expect(err).toBeDefined();
+        }finally {
+            expect(hasError).toBe(true);
+        }
+    });
+
+    test("Genereate an error by passing a argument that doesn't exist", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("NoType");
+            hasError = false;
+        }catch(err){
+            expect(err).toBeDefined();
+        }finally {
+            expect(hasError).toBe(true);
+        }
+
+    });
+
+    test("Generate Parameter object using temperature argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("temperature");
+            hasError = false;
+            expect(paramter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("temperature");
+        }catch(err){
+            expect(err).toBe(null);
+        }finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using humidity argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("humidity");
+            hasError = false;
+            expect(paramter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("humidity");
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using pressure argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("pressure");
+            hasError = false;
+            expect(paramter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("pressure");
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using isSunny argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("isSunny");
+            hasError = false;
+            expect(paramter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("isSunny");
+        } catch (err) {
+            expect(err).toBe(null)
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using isRainy argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("isRainy");
+            hasError = false;
+            expect(paramter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("isRainy");
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using light argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("light");
+            hasError = false;
+            expect(paramter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("light");
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+});
+
 describe("Clean up Database", () => {
 
     test('Remove all cards (Test)', (done) => {
@@ -222,9 +349,6 @@ describe("Clean up Database", () => {
            done();
        })
     });
-
-    test("Close connection", () => {
-    })
 
 });
 
