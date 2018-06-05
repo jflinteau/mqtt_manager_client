@@ -9,10 +9,14 @@ import seeder from "../src/default/seeder/seedParameters";
 const cardId = "E3:23:12:44:22";
 const parameter = "temperature";
 
+afterAll(() => {
+    mongoose.connection.close();
+});
+
 describe("Seed Data to Parameter docuement", () => {
-    test("Create Parameter Docuement", async () => {
+    test("Create Parameter Docuement", () => {
         try {
-            await seeder.seedParameters();
+            seeder.seedParameters();
         }catch(err){
             expect(err).toBe(null);
         }
@@ -220,7 +224,6 @@ describe("Clean up Database", () => {
     });
 
     test("Close connection", () => {
-        mongoose.connection.close();
     })
 
 });
