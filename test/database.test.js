@@ -26,29 +26,6 @@ beforeAll(() => {
     }
 })
 
-describe("Seed Data to Parameter docuement", () => {
-    test("Find Parameters", (done) => {
-        setTimeout(() => {
-            Parameter.find({}, "", (err, parameters) => {
-                expect(err).toBe(null);
-                expect(parameters.length).not.toBe(0);
-                parameters.forEach((param, index) => {
-                    expect(param.value).toBeDefined();
-                    expect(param.name).toBeDefined();
-                });
-                done();
-            })
-        }, 1000);
-    });
-
-    test('Delete all the parameters', (done) => {
-       Parameter.deleteMany({}, (err) => {
-            expect(err).toBe(null);
-            done();
-       });
-    });
-});
-
 describe("Test CRUD with Card Model", () => {
     var card = undefined;
     var piece = undefined;
