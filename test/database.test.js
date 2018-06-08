@@ -14,15 +14,19 @@ afterAll(() => {
     mongoose.connection.close();
 });
 
-describe("Seed Data to Parameter docuement", () => {
-    test("Create Parameter Docuement", () => {
-        try {
-            seeder.seedParameters();
-        }catch(err){
-            expect(err).toBe(null);
-        }
-    });
+beforeEach(() => {
+    var hasError = true;
+    try {
+        seeder.seedParameters();
+        hasError = false;
+    }catch(err){
+        expect(err).toBe(null);
+    }finally {
+        expect(hasError).toBe(false);
+    }
+})
 
+describe("Seed Data to Parameter docuement", () => {
     test("Find Parameters", (done) => {
         setTimeout(() => {
             Parameter.find({}, "", (err, parameters) => {
@@ -202,18 +206,6 @@ describe("Test CRUD with Log", () => {
 });
 
 describe("Test parameter factory", () => {
-    test("Create Parameter Docuement", () => {
-        var hasError = true;
-        try {
-            seeder.seedParameters();
-            hasError = false;
-        }catch(err){
-            expect(err).toBe(null);
-        }finally {
-            expect(hasError).toBe(false);
-        }
-    });
-
     test("Generate error by not passing type argument", () => {
         var hasError = true;
         try {
