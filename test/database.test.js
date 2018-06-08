@@ -206,10 +206,10 @@ describe("Test CRUD with Log", () => {
 });
 
 describe("Test parameter factory", () => {
-    test("Generate error by not passing type argument", () => {
+    test("Generate error by not passing type argument",async () => {
         var hasError = true;
         try {
-            var parameter = ParameterFactory.create();
+            var parameter = await ParameterFactory.create();
             expect(parameter).toBeUndefined();
             hasError = false;
         }catch(err){
@@ -233,38 +233,35 @@ describe("Test parameter factory", () => {
 
     });
 
-    test("Generate Parameter object using temperature argument", async () => {
+    test("Generate Parameter object using temperature argument", async (done) => {
         var hasError = true;
         try {
             var parameter = await ParameterFactory.create("temperature");
-            console.error(parameter);
-            Parameter.find({}, '', (err, data) => {
-                console.error(data);
-                console.error(err);
-            })
             hasError = false;
             expect(parameter).not.toBe(null);
             expect(parameter).toBeDefined();
+            expect(parameter.name).toBe('temperature');
+            expect(parameter.value).toBe('0');
         }catch(err){
             expect(err).toBe(null);
         }finally {
             expect(hasError).toBe(false);
+            done();
         }
     });
 
-    test("Generate Parameter object using humidity argument", () => {
+    test("Generate Parameter object using humidity argument", async (done) => {
         var hasError = true;
         try {
-            var parameter = ParameterFactory.create("humidity");
+            var parameter = await ParameterFactory.create("humidity");
             hasError = false;
             expect(parameter).not.toBe(null);
             expect(parameter).toBeDefined();
-            expect(parameter.value).toBe("0");
-            expect(parameter.name).toBe("humidity");
         } catch (err) {
             expect(err).toBe(null);
         } finally {
             expect(hasError).toBe(false);
+            done();
         }
     });
 
@@ -275,8 +272,6 @@ describe("Test parameter factory", () => {
             hasError = false;
             expect(parameter).not.toBe(null);
             expect(parameter).toBeDefined();
-            expect(parameter.value).toBe("0");
-            expect(parameter.name).toBe("pressure");
         } catch (err) {
             expect(err).toBe(null);
         } finally {
@@ -291,8 +286,6 @@ describe("Test parameter factory", () => {
             hasError = false;
             expect(parameter).not.toBe(null);
             expect(parameter).toBeDefined();
-            expect(parameter.value).toBe("false");
-            expect(parameter.name).toBe("isSunny");
         } catch (err) {
             expect(err).toBe(null)
         } finally {
@@ -307,8 +300,6 @@ describe("Test parameter factory", () => {
             hasError = false;
             expect(parameter).not.toBe(null);
             expect(parameter).toBeDefined();
-            expect(parameter.value).toBe("false");
-            expect(parameter.name).toBe("isRainy");
         } catch (err) {
             expect(err).toBe(null);
         } finally {
@@ -323,8 +314,6 @@ describe("Test parameter factory", () => {
             hasError = false;
             expect(parameter).not.toBe(null);
             expect(parameter).toBeDefined();
-            expect(parameter.value).toBe("0");
-            expect(parameter.name).toBe("light");
         } catch (err) {
             expect(err).toBe(null);
         } finally {
@@ -333,31 +322,5 @@ describe("Test parameter factory", () => {
     });
 
 });
-
-describe("Clean up Database", () => {
-
-    test('Remove all cards (Test)', (done) => {
-        Card.deleteMany({ "cardId": cardId } ,(err) => {
-            expect(err).toBe(null);
-            done();
-        });
-    });
-
-    test("Remove all MQTT configurations (Tests)", (done) => {
-       MqttConfiguration.deleteMany({ "cardId": cardId }, (err) => {
-           expect(err).toBe(null);
-           done();
-       });
-    });
-
-    test("Remove all Logs (Tests", (done) => {
-       Log.deleteMany({ "cardId": cardId}, (err) => {
-           expect(err).toBe(null);
-           done();
-       })
-    });
-
-});
-
 
 

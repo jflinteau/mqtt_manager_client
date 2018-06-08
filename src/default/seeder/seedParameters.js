@@ -6,13 +6,14 @@ var seeder = require('mongoose-seeder');
 class Seeder{
     constructor(){ }
 
-    seedParameters(){
+    async seedParameters(){
         Parameter.collection.drop();
-        data.parameter.forEach((p) => {
-            var param = new Parameter(p);
-            param.save((err) => {
-                if(err) throw err;
+        data.parameter.forEach((param) => {
+            var p = new Parameter({
+                name: param.name,
+                value: param.value
             });
+            p.save();
         });
     }
 }

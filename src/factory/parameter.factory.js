@@ -1,22 +1,28 @@
 import { Parameter } from "../models/parameter.model";
+var data = require('../default/data/Parameters.json');
 
 class ParameterFactory{
 
+    static async find(type){
+        return await data.parameter.find( param => {
+            return param.name = type;
+        });
+    }
+
     static async create(type){
-        console.error(type);
         switch (type) {
             case "temperature":
-                return await Parameter.findOne({"name": "temperature"});
+                return await this.find(type);
             case "humidity":
-                return await Parameter.findOne({"name": "humidity"});
+                return await this.find(type);
             case "pressure":
-                return await Parameter.findOne({"name": "pressure"});
+                return await this.find(type);
             case "isSunny":
-                return await Parameter.findOne({"name": "isSunny"});
+                return await this.find(type);
             case "isRainy":
-                return await Parameter.findOne({"name": "isRainy"});
+                return await this.find(type);
             case "light":
-                return await Parameter.findOne({"name": "light"});
+                return await this.find(type);
             case '':
                 throw new Error("String shouldn't be empty");
             case undefined:
