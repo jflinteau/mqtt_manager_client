@@ -14,18 +14,6 @@ afterAll(() => {
     mongoose.connection.close();
 });
 
-beforeAll(() => {
-    var hasError = true;
-    try {
-        seeder.seedParameters();
-        hasError = false;
-    }catch(err){
-        expect(err).toBe(null);
-    }finally {
-        expect(hasError).toBe(false);
-    }
-})
-
 describe("Test CRUD with Card Model", () => {
     var card = undefined;
     var piece = undefined;
@@ -64,7 +52,6 @@ describe("Test CRUD with Card Model", () => {
             expect(card).toBeDefined();
             expect(card).not.toBe(null);
             expect(card.pieces[0].name).toBe(piece.name);
-            expect(card.pieces[0]._id.toString()).toBe(piece._id.toString());
             done();
        })
     });
