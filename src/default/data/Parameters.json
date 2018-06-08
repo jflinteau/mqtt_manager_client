@@ -1,0 +1,28 @@
+{
+  "parameter": [
+    {
+      "name": "temperature",
+      "value": "0"
+    },
+    {
+      "name": "humidity",
+      "value": "0"
+    },
+    {
+      "name": "pressure",
+      "value": "0"
+    },
+    {
+      "name": "isSunny",
+      "value": "false"
+    },
+    {
+      "name": "isRainy",
+      "value": "false"
+    },
+    {
+      "name": "light",
+      "value": "0"
+    }
+  ]
+}

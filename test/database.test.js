@@ -2,11 +2,52 @@ import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
 import { mongoose } from "../src/repository/common.repo";
 import { Card } from '../src/models/card.model';
 import { Log } from "../src/models/log.model";
-import { PieceBuilder } from "../src/builders/piece.builder"
-
+import { Parameter } from "../src/models/parameter.model";
+import { PieceBuilder } from "../src/builders/piece.builder";
+import { ParameterFactory } from "../src/factory/parameter.factory";
+import seeder from "../src/default/seeder/seedParameters";
 
 const cardId = "E3:23:12:44:22";
-const parameter = "Temperature";
+const parameter = "temperature";
+
+afterAll(() => {
+    mongoose.connection.close();
+});
+
+beforeAll(() => {
+    var hasError = true;
+    try {
+        seeder.seedParameters();
+        hasError = false;
+    }catch(err){
+        expect(err).toBe(null);
+    }finally {
+        expect(hasError).toBe(false);
+    }
+})
+
+describe("Seed Data to Parameter docuement", () => {
+    test("Find Parameters", (done) => {
+        setTimeout(() => {
+            Parameter.find({}, "", (err, parameters) => {
+                expect(err).toBe(null);
+                expect(parameters.length).not.toBe(0);
+                parameters.forEach((param, index) => {
+                    expect(param.value).toBeDefined();
+                    expect(param.name).toBeDefined();
+                });
+                done();
+            })
+        }, 1000);
+    });
+
+    test('Delete all the parameters', (done) => {
+       Parameter.deleteMany({}, (err) => {
+            expect(err).toBe(null);
+            done();
+       });
+    });
+});
 
 describe("Test CRUD with Card Model", () => {
     var card = undefined;
@@ -164,34 +205,122 @@ describe("Test CRUD with Log", () => {
     });
 });
 
-describe("Clean up Database", () => {
+describe("Test parameter factory", () => {
+    test("Generate error by not passing type argument",async () => {
+        var hasError = true;
+        try {
+            var parameter = await ParameterFactory.create();
+            expect(parameter).toBeUndefined();
+            hasError = false;
+        }catch(err){
+            expect(err).toBeDefined();
+        }finally {
+            expect(hasError).toBe(true);
+        }
+    });
 
-    test('Remove all cards (Test)', (done) => {
-        Card.deleteMany({ "cardId": cardId } ,(err) => {
+    test("Genereate an error by passing a argument that doesn't exist", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("NoType");
+            expect(parameter).toBeUndefined();
+            hasError = false;
+        }catch(err){
+            expect(err).toBeDefined();
+        }finally {
+            expect(hasError).toBe(true);
+        }
+
+    });
+
+    test("Generate Parameter object using temperature argument", async (done) => {
+        var hasError = true;
+        try {
+            var parameter = await ParameterFactory.create("temperature");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+            expect(parameter.name).toBe('temperature');
+            expect(parameter.value).toBe('0');
+        }catch(err){
             expect(err).toBe(null);
+        }finally {
+            expect(hasError).toBe(false);
             done();
-        });
+        }
     });
 
-    test("Remove all MQTT configurations (Tests)", (done) => {
-       MqttConfiguration.deleteMany({ "cardId": cardId }, (err) => {
-           expect(err).toBe(null);
-           done();
-       });
+    test("Generate Parameter object using humidity argument", async (done) => {
+        var hasError = true;
+        try {
+            var parameter = await ParameterFactory.create("humidity");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+            done();
+        }
     });
 
-    test("Remove all Logs (Tests", (done) => {
-       Log.deleteMany({ "cardId": cardId}, (err) => {
-           expect(err).toBe(null);
-           done();
-       })
+    test("Generate Parameter object using pressure argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("pressure");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
     });
 
-    test("Close connection", () => {
-        mongoose.connection.close();
-    })
+    test("Generate Parameter object using isSunny argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("isSunny");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+        } catch (err) {
+            expect(err).toBe(null)
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using isRainy argument", async () => {
+        var hasError = true;
+        try {
+            var parameter = await ParameterFactory.create("isRainy");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using light argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("light");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
 
 });
-
 
 

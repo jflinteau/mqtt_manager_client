@@ -6,6 +6,6 @@ var pieceSchema = new Schema({
     parameters: { type: Array, default: []}
 });
 
-var Piece = mongoose.model('Piece', pieceSchema);
+var Piece = mongoose.model('Pieces', pieceSchema);
 
 export { Piece }
