@@ -1,7 +1,5 @@
 version: '0.0.1'
 services:
-  mqtt-client:
-    build: .
   mongo:
     image: "mongo"
     ports:

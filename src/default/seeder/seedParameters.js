@@ -1,4 +1,5 @@
 import { Parameter } from "../../models/parameter.model";
+import {mongoose} from "../../repository/common.repo";
 var data = require('../data/Parameters.json');
 var seeder = require('mongoose-seeder');
 
@@ -6,11 +7,13 @@ class Seeder{
     constructor(){ }
 
     async seedParameters(){
-        data.parameter.forEach((p) => {
-            var param = new Parameter(p);
-            param.save((err) => {
-                if(err) console.error(err);
+        Parameter.collection.drop();
+        data.parameter.forEach((param) => {
+            var p = new Parameter({
+                name: param.name,
+                value: param.value
             });
+            p.save();
         });
     }
 }
