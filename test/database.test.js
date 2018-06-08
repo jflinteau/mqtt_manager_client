@@ -14,7 +14,7 @@ afterAll(() => {
     mongoose.connection.close();
 });
 
-beforeEach(() => {
+beforeAll(() => {
     var hasError = true;
     try {
         seeder.seedParameters();

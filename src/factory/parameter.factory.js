@@ -20,7 +20,6 @@ class ParameterFactory{
             default:
                 throw new Error("This type doesn't exists");
         }
-
     }
 
 }

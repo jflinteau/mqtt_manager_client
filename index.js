@@ -11,7 +11,7 @@ var card = new Card({
 async function param(){
 
     var parameter = await ParameterFactory.create("temperature");
-
+    console.log("This is a parameter");
     console.log(parameter);
 }
 
