@@ -17,6 +17,10 @@ class ParameterFactory{
                 return await Parameter.findOne({"name": "isRainy"});
             case "light":
                 return await Parameter.findOne({"name": "light"});
+            case '':
+                throw new Error("String shouldn't be empty");
+            case undefined:
+                throw new Error("Undefined type doesn't work");
             default:
                 throw new Error("This type doesn't exists");
         }

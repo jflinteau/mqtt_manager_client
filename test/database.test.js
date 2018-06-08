@@ -236,9 +236,14 @@ describe("Test parameter factory", () => {
     test("Generate Parameter object using temperature argument", async () => {
         var hasError = true;
         try {
-            console.error("Before the factory");
             var parameter = await ParameterFactory.create("temperature");
+            console.error(parameter);
+            Parameter.find({}, '', (err, data) => {
+                console.error(data);
+                console.error(err);
+            })
             hasError = false;
+            expect(parameter).not.toBe(null);
             expect(parameter).toBeDefined();
         }catch(err){
             expect(err).toBe(null);
@@ -247,80 +252,85 @@ describe("Test parameter factory", () => {
         }
     });
 
-//    test("Generate Parameter object using humidity argument", () => {
-//        var hasError = true;
-//        try {
-//            var parameter = ParameterFactory.create("humidity");
-//            hasError = false;
-//            expect(parameter).toBeDefined();
-//            expect(parameter.value).toBe("0");
-//            expect(parameter.name).toBe("humidity");
-//        } catch (err) {
-//            expect(err).toBe(null);
-//        } finally {
-//            expect(hasError).toBe(false);
-//        }
-//    });
-//
-//    test("Generate Parameter object using pressure argument", () => {
-//        var hasError = true;
-//        try {
-//            var parameter = ParameterFactory.create("pressure");
-//            hasError = false;
-//            expect(parameter).toBeDefined();
-//            expect(parameter.value).toBe("0");
-//            expect(parameter.name).toBe("pressure");
-//        } catch (err) {
-//            expect(err).toBe(null);
-//        } finally {
-//            expect(hasError).toBe(false);
-//        }
-//    });
-//
-//    test("Generate Parameter object using isSunny argument", () => {
-//        var hasError = true;
-//        try {
-//            var parameter = ParameterFactory.create("isSunny");
-//            hasError = false;
-//            expect(parameter).toBeDefined();
-//            expect(parameter.value).toBe("false");
-//            expect(parameter.name).toBe("isSunny");
-//        } catch (err) {
-//            expect(err).toBe(null)
-//        } finally {
-//            expect(hasError).toBe(false);
-//        }
-//    });
-//
-//    test("Generate Parameter object using isRainy argument", async () => {
-//        var hasError = true;
-//        try {
-//            var parameter = await ParameterFactory.create("isRainy");
-//            hasError = false;
-//            expect(parameter).toBeDefined();
-//            expect(parameter.value).toBe("false");
-//            expect(parameter.name).toBe("isRainy");
-//        } catch (err) {
-//            expect(err).toBe(null);
-//        } finally {
-//            expect(hasError).toBe(false);
-//        }
-//    });
-//
-//    test("Generate Parameter object using light argument", () => {
-//        var hasError = true;
-//        try {
-//            var parameter = ParameterFactory.create("light");
-//            hasError = false;
-//            expect(parameter).toBeDefined();
-//            expect(parameter.value).toBe("0");
-//            expect(parameter.name).toBe("light");
-//        } catch (err) {
-//            expect(err).toBe(null);
-//        } finally {
-//            expect(hasError).toBe(false);
-//        }
-//    });
+    test("Generate Parameter object using humidity argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("humidity");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("humidity");
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using pressure argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("pressure");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("pressure");
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using isSunny argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("isSunny");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+            expect(parameter.value).toBe("false");
+            expect(parameter.name).toBe("isSunny");
+        } catch (err) {
+            expect(err).toBe(null)
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using isRainy argument", async () => {
+        var hasError = true;
+        try {
+            var parameter = await ParameterFactory.create("isRainy");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+            expect(parameter.value).toBe("false");
+            expect(parameter.name).toBe("isRainy");
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
+
+    test("Generate Parameter object using light argument", () => {
+        var hasError = true;
+        try {
+            var parameter = ParameterFactory.create("light");
+            hasError = false;
+            expect(parameter).not.toBe(null);
+            expect(parameter).toBeDefined();
+            expect(parameter.value).toBe("0");
+            expect(parameter.name).toBe("light");
+        } catch (err) {
+            expect(err).toBe(null);
+        } finally {
+            expect(hasError).toBe(false);
+        }
+    });
 
 });
 
