@@ -1,4 +1,3 @@
-import { Parameter } from "../models/parameter.model";
 var data = require('../default/data/Parameters.json');
 
 class ParameterFactory{
