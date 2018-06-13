@@ -28,7 +28,7 @@
     "mongoose": "^5.1.2",
     "mongoose-seeder": "^1.2.1",
     "mongoose-unique-validator": "^2.0.1",
-    "paho-mqtt": "^1.0.4",
+    "mqtt": "^2.18.1",
     "uuid": "^3.2.1"
   },
   "devDependencies": {

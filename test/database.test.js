@@ -2,10 +2,8 @@ import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
 import { mongoose } from "../src/repository/common.repo";
 import { Card } from '../src/models/card.model';
 import { Log } from "../src/models/log.model";
-import { Parameter } from "../src/models/parameter.model";
 import { PieceBuilder } from "../src/builders/piece.builder";
 import { ParameterFactory } from "../src/factory/parameter.factory";
-import seeder from "../src/default/seeder/seedParameters";
 
 const cardId = "E3:23:12:44:22";
 const parameter = "temperature";
@@ -19,9 +17,6 @@ describe("Test CRUD with Card Model", () => {
     var piece = undefined;
 
     test("Create a card for MongoDB", () => {
-        expect(card).toBeUndefined();
-        expect(piece).toBeUndefined();
-
         piece = new PieceBuilder().makeName("RPI 3").makeNewParameter({name: "Temperature", value: "100"}).build();
 
         card = new Card({
