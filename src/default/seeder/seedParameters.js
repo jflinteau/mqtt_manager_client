@@ -1,7 +1,5 @@
 import { Parameter } from "../../models/parameter.model";
-import {mongoose} from "../../repository/common.repo";
 var data = require('../data/Parameters.json');
-var seeder = require('mongoose-seeder');
 
 class Seeder{
     constructor(){ }
