@@ -8,8 +8,13 @@ import { ParameterFactory } from "../src/factory/parameter.factory";
 const cardId = "E3:23:12:44:22";
 const parameter = "temperature";
 
-afterAll(() => {
-    mongooseUtils.mongoose.connection.close();
+afterAll(async () => {
+    try {
+        await mongooseUtils.mongoose.disconnect();
+    }catch(e){
+
+    }
+
 });
 
 describe("Test CRUD with Card Model", () => {
@@ -26,7 +31,6 @@ describe("Test CRUD with Card Model", () => {
             ],
             date: new Date()
         });
-
         expect(card).not.toBeUndefined();
         expect(card.pieces[0]).toBe(piece);
     });

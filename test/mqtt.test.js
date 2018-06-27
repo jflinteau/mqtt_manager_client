@@ -1,4 +1,5 @@
 import MqttAdapter from "../src/adapter/mqtt/mqttAdapter.adapter";
+import mongooseUtils from "../src/repository/mongoose.utils";
 
 describe("Communication with MQTT Server", () => {
     var mqttAdapter = null;
@@ -8,6 +9,7 @@ describe("Communication with MQTT Server", () => {
 
     afterAll( () => {
         try {
+            mongooseUtils.mongoose.disconnect();
             mqttAdapter.disconnect();
         }catch(e){
             console.error(e);

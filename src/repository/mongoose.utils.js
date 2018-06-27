@@ -2,7 +2,7 @@ const MONGOOSE = require('mongoose');
 
 class MongooseUtils{
     constructor(){
-        MONGOOSE.connect('mongodb://localhost:27017/weather_ai');
+        MONGOOSE.connect('mongodb://localhost:27017/weather_ai', { keepAlive: 120, poolSize: 4 });
         MONGOOSE.connection.on('connected', this.onConnection);
         MONGOOSE.connection.on('disconnect', this.onDisconnect);
         MONGOOSE.connection.on('error', this.onError)
