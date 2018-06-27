@@ -6,6 +6,14 @@ describe("Communication with MQTT Server", () => {
     var parameter = 'temperature';
     const topic = `iot-weather/${cardId}/${parameter}`;
 
+    afterAll( () => {
+        try {
+            mqttAdapter.disconnect();
+        }catch(e){
+            console.error(e);
+        }
+    })
+
     test('Connect to the MQTT Broker', () => {
         try {
             mqttAdapter = MqttAdapter;
@@ -29,5 +37,5 @@ describe("Communication with MQTT Server", () => {
         }catch (e) {
             expect(e).toBe(null);
         }
-    })
+    });
 });

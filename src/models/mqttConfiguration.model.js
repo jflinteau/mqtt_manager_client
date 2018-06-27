@@ -1,5 +1,5 @@
 
-import { mongoose } from "../repository/common.repo";
+import { mongoose } from "../repository/mongooseUtils.utils";
 import { model } from "mongoose";
 var mongooseUniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;

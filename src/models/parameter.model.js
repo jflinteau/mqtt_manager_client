@@ -1,4 +1,4 @@
-import { mongoose } from "../repository/common.repo";
+import { mongoose } from "../repository/mongooseUtils.utils";
 var Schema = mongoose.Schema;
 
 var parameterSchema = new Schema({

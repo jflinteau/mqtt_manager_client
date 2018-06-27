@@ -1,5 +1,5 @@
 import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
-import { mongoose } from "../src/repository/common.repo";
+import { mongoose } from "../src/repository/mongooseUtils.utils";
 import { Card } from '../src/models/card.model';
 import { Log } from "../src/models/log.model";
 import { PieceBuilder } from "../src/builders/piece.builder";

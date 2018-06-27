@@ -1,4 +1,4 @@
-import { mongoose } from "../repository/common.repo";
+import mongooseUtils from "../repository/mongooseUtils.utils";
 var mongooseUniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 

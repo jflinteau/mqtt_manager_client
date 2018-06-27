@@ -1,4 +1,4 @@
-import { mongoose } from "../repository/common.repo";
+import { mongoose } from "../repository/mongooseUtils.utils";
 import {Card} from "./card.model";
 var Schema = mongoose.Schema;
 
