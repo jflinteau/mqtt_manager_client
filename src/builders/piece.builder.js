@@ -1,5 +1,5 @@
-import { Piece } from '../models/piece.model';
-import { Parameter } from '../models/parameter.model';
+import Piece from '../models/piece.model';
+import Parameter from '../models/parameter.model';
 
 export class PieceBuilder {
     constructor(){

@@ -1,11 +1,10 @@
-import { mongoose } from "../repository/common.repo";
-var Schema = mongoose.Schema;
+import mongooseUtils from "../repository/mongoose.utils";
+var Schema = mongooseUtils.mongoose.Schema;
 
 var pieceSchema = new Schema({
     pieceName: {type: String},
     parameters: { type: Array, default: []}
 });
 
-var Piece = mongoose.model('Pieces', pieceSchema);
+export default mongooseUtils.mongoose.model('Pieces', pieceSchema);
 
-export { Piece }

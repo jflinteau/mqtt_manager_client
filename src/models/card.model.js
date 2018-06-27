@@ -1,6 +1,6 @@
-import { mongoose } from "../repository/common.repo";
+import mongooseUtils from "../repository/mongoose.utils";
 var mongooseUniqueValidator = require('mongoose-unique-validator');
-var Schema = mongoose.Schema;
+var Schema = mongooseUtils.mongoose.Schema;
 
 var cardSchema = new Schema({
     cardId: {type: String, required: true},
@@ -10,5 +10,4 @@ var cardSchema = new Schema({
 
 cardSchema.plugin(mongooseUniqueValidator);
 
-var Card = mongoose.model('Cards', cardSchema);
-export { Card };
+export default mongooseUtils.mongoose.model('Cards', cardSchema);
