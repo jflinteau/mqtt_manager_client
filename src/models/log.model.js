@@ -1,6 +1,6 @@
 import mongooseUtils from "../repository/mongoose.utils";
 import Card from "./card.model";
-var Schema = mongoose.Schema;
+var Schema = mongooseUtils.mongoose.Schema;
 
 var logSchema = new Schema({
     cardId: { type: String, required: true},

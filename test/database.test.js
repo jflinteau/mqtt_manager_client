@@ -1,7 +1,7 @@
-import { MqttConfiguration } from '../src/models/mqttConfiguration.model';
-import { mongoose } from "../src/repository/mongoose.utils";
-import { Card } from '../src/models/card.model';
-import { Log } from "../src/models/log.model";
+import MqttConfiguration from '../src/models/mqttConfiguration.model';
+import mongooseUtils from "../src/repository/mongoose.utils";
+import Card from '../src/models/card.model';
+import Log from "../src/models/log.model";
 import { PieceBuilder } from "../src/builders/piece.builder";
 import { ParameterFactory } from "../src/factory/parameter.factory";
 
@@ -9,7 +9,7 @@ const cardId = "E3:23:12:44:22";
 const parameter = "temperature";
 
 afterAll(() => {
-    mongoose.connection.close();
+    mongooseUtils.mongoose.connection.close();
 });
 
 describe("Test CRUD with Card Model", () => {

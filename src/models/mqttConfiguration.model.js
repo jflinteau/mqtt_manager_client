@@ -1,7 +1,7 @@
 
 import mongooseUtils from "../repository/mongoose.utils";
 var mongooseUniqueValidator = require('mongoose-unique-validator');
-var Schema = mongoose.Schema;
+var Schema = mongooseUtils.mongoose.Schema;
 
 var configurationSchema = new Schema({
    cardId: { type: String, required: true },

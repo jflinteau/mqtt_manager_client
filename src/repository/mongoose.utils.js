@@ -10,7 +10,12 @@ class MongooseUtils{
 
     onConnection() {
         this.isConnected = true;
-        this.__closeConnectionOnProcessStop();
+        process.on('SIGINT', function() {
+            MONGOOSE.connection.close(function () {
+                console.log('Mongoose default connection disconnected through app termination');
+                process.exit(0);
+            });
+        });
     }
 
     onDisconnect() {
@@ -21,14 +26,6 @@ class MongooseUtils{
         console.error(err);
     }
 
-    __closeConnectionOnProcessStop(){
-        process.on('SIGINT', function() {
-            MONGOOSE.connection.close(function () {
-                console.log('Mongoose default connection disconnected through app termination');
-                process.exit(0);
-            });
-        });
-    }
 
     get isConnected() {
         return this.isConnected;
