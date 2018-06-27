@@ -1,6 +1,5 @@
 
-import { mongoose } from "../repository/mongooseUtils.utils";
-import { model } from "mongoose";
+import mongooseUtils from "../repository/mongoose.utils";
 var mongooseUniqueValidator = require('mongoose-unique-validator');
 var Schema = mongoose.Schema;
 
@@ -9,6 +8,5 @@ var configurationSchema = new Schema({
    parameter: { type: String,  required: true}
 });
 
-var MqttConfiguration = mongoose.model('MqttConfigurations', configurationSchema);
+export default mongooseUtils.mongoose.model('MqttConfigurations', configurationSchema);
 
-export { MqttConfiguration }

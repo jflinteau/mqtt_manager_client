@@ -1,4 +1,4 @@
-import { mongoose } from "../repository/mongooseUtils.utils";
+import mongooseUtils from "../repository/mongoose.utils";
 var Schema = mongoose.Schema;
 
 var pieceSchema = new Schema({
@@ -6,6 +6,5 @@ var pieceSchema = new Schema({
     parameters: { type: Array, default: []}
 });
 
-var Piece = mongoose.model('Pieces', pieceSchema);
+export default mongooseUtils.mongoose.model('Pieces', pieceSchema);
 
-export { Piece }

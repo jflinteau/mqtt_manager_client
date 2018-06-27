@@ -1,4 +1,4 @@
-import { mongoose } from "../repository/mongooseUtils.utils";
+import mongooseUtils from "../repository/mongoose.utils";
 var Schema = mongoose.Schema;
 
 var parameterSchema = new Schema({
@@ -6,6 +6,5 @@ var parameterSchema = new Schema({
     value: {type: String, default: ""}
 });
 
-var Parameter = mongoose.model("Parameters", parameterSchema);
+export default mongooseUtils.mongoose.model("Parameters", parameterSchema);
 
-export { Parameter };

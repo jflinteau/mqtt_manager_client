@@ -1,5 +1,5 @@
-import { mongoose } from "../repository/mongooseUtils.utils";
-import {Card} from "./card.model";
+import mongooseUtils from "../repository/mongoose.utils";
+import Card from "./card.model";
 var Schema = mongoose.Schema;
 
 var logSchema = new Schema({
@@ -8,6 +8,5 @@ var logSchema = new Schema({
     timestamp: { type: Date, default: Date.now(), timestamp: true}
 });
 
-var Log = mongoose.model("Logs", logSchema);
+export default mongooseUtils.mongoose.model("Logs", logSchema);
 
-export { Log }
