@@ -1,10 +1,11 @@
 import MqttAdapter from "../src/adapter/mqtt/mqttAdapter.adapter";
 import mongooseUtils from "../src/repository/mongoose.utils";
+import MqttConfigurations from '../src/models/mqttConfiguration.model';
+import Log from '../src/models/log.model';
+import { cardId, parameter } from "./database.test";
 
 describe("Communication with MQTT Server", () => {
     var mqttAdapter = null;
-    var cardId = '00-00-00';
-    var parameter = 'temperature';
     const topic = `iot-weather/${cardId}/${parameter}`;
 
     afterAll( () => {

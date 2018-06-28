@@ -5,8 +5,8 @@ import Log from "../src/models/log.model";
 import { PieceBuilder } from "../src/builders/piece.builder";
 import { ParameterFactory } from "../src/factory/parameter.factory";
 
-const cardId = "E3:23:12:44:22";
-const parameter = "temperature";
+export const cardId = "E3:23:12:44:22";
+export const parameter = "Temperature";
 
 afterAll(async () => {
     try {

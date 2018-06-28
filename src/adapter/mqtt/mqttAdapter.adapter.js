@@ -1,41 +1,45 @@
 var mqtt = require('mqtt');
-import { MqttConfiguration } from "../../models/mqttConfiguration.model";
+import MqttConfiguration from "../../models/mqttConfiguration.model";
 
-class MqttAdapter{
-    constructor(){
+var client = null;
+
+class MqttAdapter {
+    constructor() {
         this.mqttAddress = process.env.MQTT_ADDRESS || "127.0.0.1";
         this.mqttPort = process.env.MQTT_PORT || 1887;
-        this.clientId = process.env.CLIENT_ID || 'client_id';
-        this.client = mqtt.connect(`mqtt://${this.mqttAddress}:${this.mqttPort}`);
-        this.client.on('connect', this.onConnect);
-        this.client.on('message', this.onMessageArrived);
-        this.client.on('close', this.onConnectionLost);
+        this.clientId = process.env.client_ID || 'client_id';
+        client = mqtt.connect(`mqtt://${this.mqttAddress}`);
+        client.on('connect', this.onConnect);
+        client.on('message', this.onMessageArrived);
+        client.on('close', this.onConnectionLost);
     }
 
-    sendMessage(topic, payload){
-        console.error(topic);
-        this.client.publish(topic, payload);
+    sendMessage(topic, payload) {
+        client.publish(topic, payload);
     }
 
-    disconnect(){
-        this.client.end();
+    disconnect() {
+        client.end();
     }
 
     /*
     * @PARAM cardId: string
     * @PARAM parameter: string
     */
-    suscribeToTopic(cardId, parameter){
-        this.client.subscribe(`iot-weather/${cardId}/${parameter}`);
+    suscribeToTopic(cardId, parameter) {
+        client.subscribe(`iot-weather/${cardId}/${parameter}`);
     }
 
-    onConnect(){
-        var mqttConfigurations = MqttConfiguration.find();
-        if(mqttConfigurations.length > 0 ) {
-            mqttConfigurations.forEach((configuration) => {
-                this.client.subscribe(`iot-weather/${configuration.cardId}/${configuration.parameter}`);
-            });
-        }
+    onConnect() {
+        MqttConfiguration.find().then((mqttConfigurations) => {
+            if (mqttConfigurations.length > 0) {
+                mqttConfigurations.forEach((configuration) => {
+                    console.error(`This is a configuration :\n${configuration}`);
+                    client.subscribe(`iot-weather/${configuration.cardId}/${configuration.parameter}`);
+                    console.error(`iot-weather/${configuration.cardId}/${configuration.parameter}`);
+                });
+            }
+        });
     }
 
     onConnectionLost(){
