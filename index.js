@@ -1,7 +1,12 @@
-import { Card } from "./src/models/card.model";
+import  Card  from "./src/models/card.model";
 import { PieceBuilder} from "./src/builders/piece.builder";
 import { ParameterFactory } from "./src/factory/parameter.factory";
+import mqttAdapter from "./src/adapter/mqtt/mqttAdapter.adapter";
 
+export const cardId = "E3:23:12:44:22";
+export const parameter = "Temperature";
+const topic = `iot-weather/${cardId}/${parameter}`;
+console.log(topic);
 var card = new Card({
     pieces: [
         new PieceBuilder().makeName("RPI 3").makeNewParameter({ name: "Temperature", value: "10000" }).build()
@@ -17,7 +22,8 @@ async function param(){
 
 param();
 
-card.save();
+//card.save();
 
-console.log(card);
+mqttAdapter.sendMessage(topic, '23');
+
 console.log("It works");
