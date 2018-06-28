@@ -1,14 +1,15 @@
 var mqtt = require('mqtt');
 import MqttConfiguration from "../../models/mqttConfiguration.model";
+import { handleNewLogs } from "../../handler/logs.handle";
 
 var client = null;
 
 class MqttAdapter {
     constructor() {
         this.mqttAddress = process.env.MQTT_ADDRESS || "127.0.0.1";
-        this.mqttPort = process.env.MQTT_PORT || 1887;
+        this.mqttPort = process.env.MQTT_PORT || 1883;
         this.clientId = process.env.client_ID || 'client_id';
-        client = mqtt.connect(`mqtt://${this.mqttAddress}`);
+        client = mqtt.connect({host: this.mqttAddress, port: this.mqttPort});
         client.on('connect', this.onConnect);
         client.on('message', this.onMessageArrived);
         client.on('close', this.onConnectionLost);
@@ -47,7 +48,11 @@ class MqttAdapter {
     }
 
     onMessageArrived(topic, message){
-        console.error(`This is the topic: \n ${topic}\n this is the message ${message}`);
+        var array = topic.split('/');
+        let cardId = array[1];
+        let parameter = array[2];
+        let parameterValue = message;
+        handleNewLogs(cardId, parameter, parameterValue);
     }
 }
 

@@ -22,9 +22,8 @@ async function param(){
 
 param();
 
-card.save();
+//card.save();
 
 mqttAdapter.sendMessage(topic, '23');
 
-console.log(card);
 console.log("It works");
